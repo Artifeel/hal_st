@@ -2890,6 +2890,9 @@ int32_t lsm6dso_angular_rate_raw_get(stmdev_ctx_t *ctx,
 int32_t lsm6dso_acceleration_raw_get(stmdev_ctx_t *ctx,
                                      int16_t *val);
 
+int32_t lsm6dso_gyro_accel_raw_get(stmdev_ctx_t *ctx,
+                                     int16_t *val);
+
 int32_t lsm6dso_fifo_out_raw_get(stmdev_ctx_t *ctx, uint8_t *buff);
 
 int32_t lsm6dso_number_of_steps_get(stmdev_ctx_t *ctx, uint16_t *val);

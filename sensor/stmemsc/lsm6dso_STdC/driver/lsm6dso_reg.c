@@ -1478,6 +1478,37 @@ int32_t lsm6dso_acceleration_raw_get(stmdev_ctx_t *ctx, int16_t *val)
 }
 
 /**
+  * @brief  Linear gyro/acceleration output register.
+  *         The value is expressed as a 16-bit word in two’s complement.[get]
+  *
+  * @param  ctx      read / write interface definitions
+  * @param  buff     buffer that stores data read
+  * @retval             interface status (MANDATORY: return 0 -> no Error)
+  *
+  */
+int32_t lsm6dso_gyro_accel_raw_get(stmdev_ctx_t *ctx, int16_t *val)
+{
+  uint8_t buff[12];
+  int32_t ret;
+
+  ret = lsm6dso_read_reg(ctx, LSM6DSO_OUTX_L_G, buff, 12);
+  val[0] = (int16_t)buff[1];
+  val[0] = (val[0] * 256) + (int16_t)buff[0];
+  val[1] = (int16_t)buff[3];
+  val[1] = (val[1] * 256) + (int16_t)buff[2];
+  val[2] = (int16_t)buff[5];
+  val[2] = (val[2] * 256) + (int16_t)buff[4];
+  val[3] = (int16_t)buff[7];
+  val[3] = (val[3] * 256) + (int16_t)buff[6];
+  val[4] = (int16_t)buff[9];
+  val[4] = (val[4] * 256) + (int16_t)buff[8];
+  val[5] = (int16_t)buff[11];
+  val[5] = (val[5] * 256) + (int16_t)buff[10];
+
+  return ret;
+}
+
+/**
   * @brief  FIFO data output [get]
   *
   * @param  ctx      read / write interface definitions
